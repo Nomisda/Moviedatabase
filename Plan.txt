@@ -1,0 +1,4 @@
+DatenBank soll haben :
+Film ( Titel ErscheinungsDatum, Regisseur)
+Regisseur ( Name, Alter,)
+Schauspieler (Name )
