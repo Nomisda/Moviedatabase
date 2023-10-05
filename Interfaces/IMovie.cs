@@ -13,4 +13,6 @@ public interface IMovie{
     bool MovieExists(int id);
 
     void ChangeMovie(Movie m);
+    bool AddSchauspielerToMovie(int MovieId, int SchauspielerId);
+    bool RemoveSchauspielerFromMovie(int Movieid, int SchauspielerId);
 }

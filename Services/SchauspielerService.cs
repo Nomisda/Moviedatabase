@@ -41,4 +41,8 @@ public class SchauspielerService : ISchauspieler{
 
         _context.SaveChanges();
     }
+
+    public List<Movie> GetMoviesBySchauspielerId(int id){
+        return _context.MovieSchauspieler.Where( ms => ms.SchauspielerId == id).Select( ms => ms.Movie).ToList();
+    }
 }

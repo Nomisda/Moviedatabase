@@ -16,4 +16,6 @@ public interface ISchauspieler{
 
     void DeleteSchauspieler(int id);
     void ChangeSchauspieler(Schauspieler s);
+
+    List<Movie> GetMoviesBySchauspielerId(int id);
 }

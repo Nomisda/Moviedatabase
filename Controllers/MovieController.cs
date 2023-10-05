@@ -76,7 +76,24 @@ public class MovieController : Controller{
 
         _movieService.ChangeMovie(IMapper.MovieDTOtoMovie(movieChange));
         return NoContent();
+    }
 
+    [HttpPost("/ghg")]
+    public ActionResult AddSchauspielerToMovie([FromQuery] int MovieId, [FromQuery] int SchauspielerId){
+        if( _movieService.AddSchauspielerToMovie(MovieId, SchauspielerId)){
+            return NoContent();
+        }else{
+            return BadRequest();
+        }
+    }
+
+    [HttpDelete("/ghg")]
+    public ActionResult RemoveSchauspielerFromMovie([FromQuery] int MovieId, [FromQuery] int SchauspielerId){
+        if(_movieService.RemoveSchauspielerFromMovie(MovieId, SchauspielerId)){
+            return NoContent();
+        }else{
+            return BadRequest();
+        }
 
     }
 

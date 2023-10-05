@@ -55,4 +55,33 @@ public class MovieService : IMovie{
 
         _context.SaveChanges();
     }
+
+    public bool AddSchauspielerToMovie(int MovieId, int SchauspielerId){
+        var x = _context.Movies.Where( m => m.Id == MovieId).FirstOrDefault();
+        var y = _context.Schauspieler.Where( s => s.Id == SchauspielerId).FirstOrDefault();
+
+        if( x == null || y == null){
+            return false;
+        }else{
+            MovieSchauspieler add = new MovieSchauspieler();
+            add.Schauspieler = y;
+            add.Movie = x;
+
+            _context.Add(add);
+            _context.SaveChanges();
+            return true;
+        }
+    
+    }
+
+    public bool RemoveSchauspielerFromMovie(int MovieId, int SchauspielerId){
+        	var x = _context.MovieSchauspieler.Where(ms => ms.MovieId == MovieId).Where( ms=> ms.SchauspielerId == SchauspielerId).First();
+            if(x == null){
+                return false;
+            }else{
+                _context.MovieSchauspieler.Remove(x);
+                _context.SaveChanges();
+                return true;
+            }
+    }
 }

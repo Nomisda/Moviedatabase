@@ -4,6 +4,7 @@ using MovieDatabase.Helper;
 using MovieDatabase.Interfaces;
 using MovieDatabase.Models;
 using MovieDatabase.Services;
+using SQLitePCL;
 
 
 [Route("[controller]")]
@@ -79,6 +80,22 @@ public class SchauspielerController : ControllerBase{
 
         _schauspielerservice.ChangeSchauspieler(IMapper.SchauspielerDTOtoSchauspieler(SchauspielerChange));
         return NoContent();
+    }
+
+    [HttpGet("/Movie/Schauspieler")]
+    public IActionResult GetMoviesBySchauspielerId([FromQuery] int SchauspielerId){
+        if( !_schauspielerservice.SchauspielerExists(SchauspielerId)){
+            return NotFound();
+        }
+
+        var x = _schauspielerservice.GetMoviesBySchauspielerId(SchauspielerId);
+        List<MovieDTO> returnMovies = new List<MovieDTO>();
+        x.ForEach( e =>{
+            returnMovies.Add(IMapper.MovietoDTO(e));
+        });
+
+        return Ok(returnMovies);
+
     }
 
 }
